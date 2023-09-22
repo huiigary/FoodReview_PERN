@@ -1,0 +1,21 @@
+.addRestaurant {
+  box-shadow: 0 0;
+  border: 2px solid red;
+  padding: 2rem;
+}
+
+input {
+  margin: 1rem;
+}
+
+label {
+  font-size: 2rem;
+}
+
+button {
+  font-size: 2rem;
+}
+
+h1 {
+  color: yellow;
+}
