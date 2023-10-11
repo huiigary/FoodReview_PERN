@@ -8,6 +8,7 @@ import { Home } from './routes/Home.jsx'
 import { RestaurantDetails } from './routes/RestaurantDetails.jsx'
 import { Update } from './routes/Update.jsx'
 import { ErrorPage } from './routes/ErrorPage.jsx'
+import { RestaurantContextProvider } from './RestaurantContextProvider.jsx'
 
 const router = createBrowserRouter([
   {
@@ -27,6 +28,8 @@ const router = createBrowserRouter([
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <RouterProvider router={router} />
+    <RestaurantContextProvider>
+      <RouterProvider router={router} />
+    </RestaurantContextProvider>
   </React.StrictMode>
 )
