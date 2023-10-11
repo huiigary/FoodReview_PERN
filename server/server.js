@@ -2,11 +2,12 @@ const express = require('express')
 require('dotenv').config()
 const morgan = require('morgan')
 const db = require('./db')
+const cors = require('cors')
 const app = express()
-
 // Middleware = some function that is between the frontend request and the backend response  (It performs something with the request).... route handler is technically also middleware
 app.use(morgan('dev')) // morgan for useful logging
 app.use(express.json()) // !! Middleware express.json is useful  enabling "req.body" so the backend can get the body request
+app.use(cors())
 
 /**
  * CRUD operations for Restaurants: api/v1/restaurants/:id
