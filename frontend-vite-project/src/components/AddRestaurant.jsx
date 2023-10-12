@@ -1,20 +1,26 @@
 import '../styles/Home.css'
-import react, { useState, setState } from 'react'
+import react, { useState, setState, useContext } from 'react'
 import { RestaurantFinder } from '../apis/RestaurantFinder'
-export const AddRestaurant = () => {
+import { RestaurantContext } from '../RestaurantContextProvider'
+
+export const AddRestaurant = ({ restaurants, setRestaurants }) => {
   const [name, setName] = useState('')
   const [location, setLocation] = useState('')
   const [priceRange, setPriceRange] = useState('')
 
-  // add new restaurant to the database
   const handleAddRestaurant = async () => {
-    // create new restaurant in backend
+    // create new restaurant in backend then locally
     if (name && location && priceRange) {
       let newRestaurant = await RestaurantFinder.post('/', {
         name,
         location,
         price_range: priceRange,
-      })
+      }).then((res) => res.data.data)
+      // locally update state with new restaurant
+      setRestaurants((prevRestaurants) => [...prevRestaurants, newRestaurant])
+      // clear input fields on success
+      setName('')
+      setLocation('')
     } else {
       console.log('cannot make new restaurant!', { name, location, priceRange })
     }

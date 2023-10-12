@@ -2,21 +2,7 @@ import react, { useState, useEffect, useContext } from 'react'
 import { RestaurantContext } from '../RestaurantContextProvider'
 import { RestaurantFinder } from '../apis/RestaurantFinder'
 
-export const RestaurantsList = () => {
-  const { restaurants, setRestaurants } = useContext(RestaurantContext)
-
-  // On mount, get list of restaurants
-  useEffect(() => {
-    const fetchRestaurants = async () => {
-      let allRestaurants = await RestaurantFinder.get().then(
-        (res) => res.data.data.restaurants
-      )
-      setRestaurants(allRestaurants)
-      console.log({ allRestaurants })
-    }
-    fetchRestaurants()
-  }, [])
-
+export const RestaurantsList = ({ restaurants }) => {
   return (
     <table>
       {/* Table header: name, location, price, review, rating */}
@@ -34,11 +20,13 @@ export const RestaurantsList = () => {
       <tbody>
         {restaurants &&
           restaurants.map((restaurant, index) => (
-            <tr key={index}>
+            <tr
+              key={index}
+              style={{ backgroundColor: 'black', color: 'white' }}
+            >
               <td
                 style={{
                   width: '100%',
-                  backgroundColor: 'red',
                 }}
               >
                 {restaurant.name}
@@ -46,7 +34,6 @@ export const RestaurantsList = () => {
               <td
                 style={{
                   width: '100%',
-                  backgroundColor: 'red',
                 }}
               >
                 {restaurant.location}
@@ -54,7 +41,6 @@ export const RestaurantsList = () => {
               <td
                 style={{
                   width: '100%',
-                  backgroundColor: 'red',
                 }}
               >
                 {restaurant.price_range}
@@ -62,15 +48,14 @@ export const RestaurantsList = () => {
               <td
                 style={{
                   width: '100%',
-                  backgroundColor: 'red',
                 }}
               >
                 reviews
               </td>
-              <td style={{ width: '100%', backgroundColor: 'red' }}>
+              <td style={{ width: '100%' }}>
                 <button style={{}}>Edit</button>
               </td>
-              <td style={{ width: '100%', mbackgroundColor: 'red' }}>
+              <td style={{ width: '100%' }}>
                 <button style={{}}>Delete</button>
               </td>
             </tr>
