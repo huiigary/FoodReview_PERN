@@ -27,7 +27,10 @@ export const Home = () => {
         restaurants={restaurants}
         setRestaurants={setRestaurants}
       />
-      <RestaurantsList restaurants={restaurants} />
+      <RestaurantsList
+        restaurants={restaurants}
+        setRestaurants={setRestaurants}
+      />
     </div>
   )
 }
