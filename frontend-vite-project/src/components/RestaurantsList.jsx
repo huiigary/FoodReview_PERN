@@ -1,6 +1,7 @@
 import React, { useState, setState } from 'react'
 import { Modal, Box, Typography, Button } from '@mui/material'
 import { RestaurantFinder } from '../apis/RestaurantFinder'
+import { useNavigate } from 'react-router-dom'
 
 const style = {
   position: 'absolute',
@@ -17,6 +18,7 @@ const style = {
 export const RestaurantsList = ({ restaurants, setRestaurants }) => {
   const [open, setOpen] = useState(false)
   const [selectedRestaurant, setSelectedRestaurant] = useState({})
+  const navigate = useNavigate()
 
   // remove from backend then locally
   const deleteRestaurant = async (id) => {
@@ -37,6 +39,11 @@ export const RestaurantsList = ({ restaurants, setRestaurants }) => {
   const openDeleteModal = (restaurant) => {
     setOpen(true)
     setSelectedRestaurant(restaurant)
+  }
+
+  // navigate to route "/update/:id" to update restaurant
+  const navigateToRestaurantEdit = (restaurantID) => {
+    navigate(`/update/${restaurantID}`)
   }
 
   return (
@@ -108,7 +115,12 @@ export const RestaurantsList = ({ restaurants, setRestaurants }) => {
                   reviews
                 </td>
                 <td style={{ width: '100%' }}>
-                  <button style={{}}>Edit</button>
+                  <button
+                    onClick={() => navigateToRestaurantEdit(restaurant.id)}
+                    style={{}}
+                  >
+                    Edit
+                  </button>
                 </td>
                 <td style={{ width: '100%' }}>
                   <button

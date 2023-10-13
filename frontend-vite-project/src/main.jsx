@@ -1,12 +1,11 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
-import App from './App.jsx'
+import App from './App.jsx' // The app and index.css files affects app layout ??
 import './index.css'
-import react from 'react'
 import { RouterProvider, createBrowserRouter } from 'react-router-dom'
 import { Home } from './routes/Home.jsx'
 import { RestaurantDetails } from './routes/RestaurantDetails.jsx'
-import { Update } from './routes/Update.jsx'
+import { UpdateRestaurant } from './routes/UpdateRestaurant.jsx'
 import { ErrorPage } from './routes/ErrorPage.jsx'
 import { RestaurantContextProvider } from './RestaurantContextProvider.jsx'
 
@@ -21,8 +20,8 @@ const router = createBrowserRouter([
     element: <RestaurantDetails />,
   },
   {
-    path: '/update',
-    element: <Update />,
+    path: '/update/:id',
+    element: <UpdateRestaurant />,
   },
 ])
 
