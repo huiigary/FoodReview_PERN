@@ -76,10 +76,21 @@ export const UpdateRestaurant = () => {
           />
         </div>
       </form>
-      {/* submit button */}
-      <button onClick={() => updateRestaurant(id, name, location, price)}>
-        Submit
-      </button>
+
+      <div>
+        <button
+          style={{ margin: 10 }}
+          onClick={() => updateRestaurant(id, name, location, price)}
+        >
+          Submit
+        </button>
+        <button
+          style={{ backgroundColor: 'red', margin: 10 }}
+          onClick={() => navigate('/')}
+        >
+          Cancel
+        </button>
+      </div>
     </div>
   )
 }
