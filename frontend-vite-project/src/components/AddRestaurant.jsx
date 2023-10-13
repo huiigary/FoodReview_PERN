@@ -10,20 +10,26 @@ export const AddRestaurant = ({ restaurants, setRestaurants }) => {
 
   const handleAddRestaurant = async () => {
     // create new restaurant in backend then locally
-    if (name && location && priceRange) {
-      let newRestaurant = await RestaurantFinder.post('/', {
-        name,
-        location,
-        price_range: priceRange,
-      }).then((res) => res.data.data)
-      // locally update state with new restaurant
-      setRestaurants((prevRestaurants) => [...prevRestaurants, newRestaurant])
-      // clear input fields on success
-      setName('')
-      setLocation('')
-    } else {
-      console.log('cannot make new restaurant!', { name, location, priceRange })
-    }
+    try {
+      if (name && location && priceRange) {
+        let newRestaurant = await RestaurantFinder.post('/', {
+          name,
+          location,
+          price_range: priceRange,
+        }).then((res) => res.data.data)
+        // locally update state with new restaurant
+        setRestaurants((prevRestaurants) => [...prevRestaurants, newRestaurant])
+        // clear input fields on success
+        setName('')
+        setLocation('')
+      } else {
+        console.log('cannot make new restaurant!', {
+          name,
+          location,
+          priceRange,
+        })
+      }
+    } catch (err) {}
   }
   return (
     <div

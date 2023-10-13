@@ -20,13 +20,17 @@ export const RestaurantsList = ({ restaurants, setRestaurants }) => {
 
   // remove from backend then locally
   const deleteRestaurant = async (id) => {
-    let deleted = await RestaurantFinder.delete(`/${id}`).then(
-      (res) => res.data.data
-    )
-    if (deleted) {
-      let filteredList = restaurants.filter((restaurant) => restaurant.id != id)
-      setRestaurants(filteredList)
-    }
+    try {
+      let deleted = await RestaurantFinder.delete(`/${id}`).then(
+        (res) => res.data.data
+      )
+      if (deleted) {
+        let filteredList = restaurants.filter(
+          (restaurant) => restaurant.id != id
+        )
+        setRestaurants(filteredList)
+      }
+    } catch (err) {}
   }
 
   // open delete modal and pass restaurant to modify
