@@ -36,14 +36,21 @@ export const RestaurantsList = ({ restaurants, setRestaurants }) => {
   }
 
   // open delete modal and pass restaurant to modify
-  const openDeleteModal = (restaurant) => {
+  const openDeleteModal = (e, restaurant) => {
+    e.stopPropagation()
     setOpen(true)
     setSelectedRestaurant(restaurant)
   }
 
   // navigate to route "/update/:id" to update restaurant
-  const navigateToRestaurantEdit = (restaurantID) => {
+  const navigateToRestaurantEdit = (e, restaurantID) => {
+    e.stopPropagation()
     navigate(`/update/${restaurantID}`)
+  }
+
+  // navigate to route "/details:id" to find restaurant details
+  const navigateToRestaurantDetails = (restaurantID) => {
+    navigate(`/details/${restaurantID}`)
   }
 
   return (
@@ -84,6 +91,7 @@ export const RestaurantsList = ({ restaurants, setRestaurants }) => {
             restaurants.map((restaurant, index) => (
               <tr
                 key={index}
+                onClick={() => navigateToRestaurantDetails(restaurant.id)}
                 style={{ backgroundColor: 'black', color: 'white' }}
               >
                 <td
@@ -116,7 +124,7 @@ export const RestaurantsList = ({ restaurants, setRestaurants }) => {
                 </td>
                 <td style={{ width: '100%' }}>
                   <button
-                    onClick={() => navigateToRestaurantEdit(restaurant.id)}
+                    onClick={(e) => navigateToRestaurantEdit(e, restaurant.id)}
                     style={{}}
                   >
                     Edit
@@ -124,7 +132,7 @@ export const RestaurantsList = ({ restaurants, setRestaurants }) => {
                 </td>
                 <td style={{ width: '100%' }}>
                   <button
-                    onClick={() => openDeleteModal(restaurant)}
+                    onClick={(e) => openDeleteModal(e, restaurant)}
                     style={{}}
                   >
                     Delete
