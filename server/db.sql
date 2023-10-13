@@ -21,6 +21,6 @@ CREATE TABLE reviews (
     review TEXT NOT NULL,
     rating INT NOT NULL check (rating >=1 AND rating <=5)
 );
-INSERT INTO reviews (name, review, rating) values ('test name', 'test review', 1);
-INSERT INTO reviews (name, review, rating) values ('test name2', 'test review2', 2);
+INSERT INTO reviews (restaurant_ID,name, review, rating) values ('35','test name', 'test review', 1);
+INSERT INTO reviews (restaurant_ID,name, review, rating) values ('36','test name2', 'test review2', 2);
 -- ALTER TABLE reviews ALTER COLUMN ratings SET NOT NULL // used to alter column
