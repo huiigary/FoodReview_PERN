@@ -1,6 +1,7 @@
 import { useParams } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 import { RestaurantFinder } from '../apis/RestaurantFinder'
+import { StarRating } from '../components/StarRating'
 
 export const RestaurantDetails = () => {
   const { id } = useParams()
@@ -37,6 +38,7 @@ export const RestaurantDetails = () => {
 
       {/* input new review for restaurant */}
       <button>Add Review</button>
+      <StarRating rating={2.5} />
     </div>
   )
 }
