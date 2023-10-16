@@ -17,7 +17,9 @@ export const AddReview = ({ restaurantID, setReviews }) => {
       ).then((res) => res.data.data)
 
       // update frontend changes
-      setReviews((prevReviews) => [...prevReviews, newReview])
+      setReviews((prevReviews) =>
+        prevReviews ? [...prevReviews, newReview] : [newReview]
+      )
     } catch (err) {
       console.log('🚀 ~ file: AddReview.jsx:27 ~ addReview ~ err:', err)
     }
