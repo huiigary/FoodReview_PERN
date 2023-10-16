@@ -99,7 +99,7 @@ export const RestaurantsList = ({ restaurants, setRestaurants }) => {
                     width: '100%',
                   }}
                 >
-                  {restaurant.name}
+                  {restaurant.id}...{restaurant.name}
                 </td>
                 <td
                   style={{
