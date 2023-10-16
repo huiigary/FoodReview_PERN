@@ -23,4 +23,6 @@ CREATE TABLE reviews (
 );
 INSERT INTO reviews (restaurant_ID,name, review, rating) values ('35','test name', 'test review', 1);
 INSERT INTO reviews (restaurant_ID,name, review, rating) values ('36','test name2', 'test review2', 2);
+INSERT INTO reviews (restaurant_ID,name, review, rating) values ('36','test name3', 'test review2', 3);
+INSERT INTO reviews (restaurant_ID,name, review, rating) values ('36','test name4', 'test review4', 4);
 -- ALTER TABLE reviews ALTER COLUMN ratings SET NOT NULL // used to alter column

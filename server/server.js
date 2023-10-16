@@ -32,10 +32,15 @@ app.get('/api/v1/restaurants/:id', async (req, res) => {
     let results = await db.query('select * from restaurants where id = $1', [
       id,
     ])
+    let results_reviews = await db.query(
+      'select * from reviews where restaurant_ID = $1',
+      [id]
+    )
+    let reviews = results_reviews.rows.length > 0 ? results_reviews.rows : null // all reviews
     let restaurant = results.rows.length > 0 ? results.rows[0] : null
     console.log({ id }, results.rows[0])
     res.status(200).json({
-      data: restaurant,
+      data: { restaurant, reviews },
     })
   } catch (err) {
     console.log('Error get one', { err })
@@ -114,6 +119,25 @@ app.patch('/api/v1/restaurants/:id', async (req, res) => {
     })
   } catch (err) {
     console.log('Error updating', { err })
+    res.status(400).send(String(err))
+  }
+})
+
+// Create new review for restaurant with id
+app.post('/api/v1/restaurants/:id/addReview', async (req, res) => {
+  try {
+    // get id from request parameters
+    let { id } = req.params
+    // get review from body
+    let { name, review, rating } = req?.body
+    // update review table with new review
+    let newReview = await db.query(
+      'INSERT INTO reviews (restaurant_id, name, review, rating) values ($1, $2, $3, $4) returning *',
+      [id, name, review, rating]
+    )
+    res.status(200).json({ data: newReview.rows[0] || null })
+  } catch (err) {
+    console.error({ err })
     res.status(400).send(String(err))
   }
 })
